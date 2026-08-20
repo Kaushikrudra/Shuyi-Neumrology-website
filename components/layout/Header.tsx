@@ -2,9 +2,12 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { useSession, signOut } from 'next-auth/react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
+import { Button } from '@/components/ui/Button';
 
 export function Header() {
+  const { data: session, status } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navLinks = [
@@ -42,8 +45,46 @@ export function Header() {
           ))}
         </nav>
 
-        {/* Right actions: ThemeToggle & Mobile Menu Button */}
-        <div className="flex items-center space-x-4">
+        {/* Right actions: Auth State & ThemeToggle & Mobile Menu Button */}
+        <div className="flex items-center space-x-3 sm:space-x-4">
+          {/* Desktop Auth State */}
+          <div className="hidden sm:flex items-center space-x-3 text-sm">
+            {status === 'loading' ? (
+              <span className="text-xs text-muted-foreground animate-pulse">...</span>
+            ) : session?.user ? (
+              <div className="flex items-center space-x-3">
+                <Link
+                  href="/dashboard"
+                  className="font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1.5 text-sm"
+                >
+                  <span className="w-2 h-2 rounded-full bg-emerald-500" />
+                  <span>{session.user.name || 'Dashboard'}</span>
+                </Link>
+                <Button
+                  onClick={() => signOut({ callbackUrl: '/' })}
+                  variant="outline"
+                  size="sm"
+                  className="text-xs px-3 py-1.5"
+                >
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Link href="/login">
+                  <Button variant="outline" size="sm" className="text-xs px-3 py-1.5">
+                    Log In
+                  </Button>
+                </Link>
+                <Link href="/signup">
+                  <Button variant="primary" size="sm" className="text-xs px-3 py-1.5 shadow-xs">
+                    Sign Up
+                  </Button>
+                </Link>
+              </div>
+            )}
+          </div>
+
           <ThemeToggle />
 
           {/* Mobile hamburger button */}
@@ -91,17 +132,63 @@ export function Header() {
 
       {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-b border-border bg-background px-4 pt-3 pb-6 space-y-2 shadow-lg animate-in fade-in slide-in-from-top-2">
+        <div className="md:hidden border-b border-border bg-background px-4 pt-3 pb-6 space-y-3 shadow-lg animate-in fade-in slide-in-from-top-2">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="block px-3 py-2.5 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              className="block px-3 py-2 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.name}
             </Link>
           ))}
+
+          {/* Mobile Auth Links */}
+          <div className="pt-3 border-t border-border/70 space-y-2">
+            {session?.user ? (
+              <>
+                <Link
+                  href="/dashboard"
+                  className="block px-3 py-2 rounded-lg text-base font-medium text-foreground hover:bg-secondary transition-colors"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  Dashboard ({session.user.name || 'Account'})
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setMobileMenuOpen(false);
+                    signOut({ callbackUrl: '/' });
+                  }}
+                  className="w-full text-left px-3 py-2 rounded-lg text-base font-medium text-red-500 hover:bg-red-500/10 transition-colors"
+                >
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <div className="flex gap-2 pt-1">
+                <Link
+                  href="/login"
+                  className="w-1/2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Button variant="outline" size="sm" className="w-full">
+                    Log In
+                  </Button>
+                </Link>
+                <Link
+                  href="/signup"
+                  className="w-1/2"
+                  onClick={() => setMobileMenuOpen(false)}
+                >
+                  <Button variant="primary" size="sm" className="w-full">
+                    Sign Up
+                  </Button>
+                </Link>
+              </div>
+            )}
+          </div>
         </div>
       )}
     </header>

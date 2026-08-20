@@ -24,7 +24,12 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
+.env
 .env*.local
+
+# sqlite
+*.db
+*.db-journal
 
 # vercel
 .vercel
@@ -32,3 +37,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+/lib/generated/prisma
+
+# editor/agent artifacts
+.agents
+.claude
+.windsurf
+skills-lock.json

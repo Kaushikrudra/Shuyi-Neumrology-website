@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Cormorant_Garamond } from 'next/font/google';
 import './globals.css';
 import '../styles/globals.css';
+import { AuthProvider } from '@/components/providers/AuthProvider';
 import { ThemeProvider } from '@/lib/theme';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -54,13 +55,15 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-background text-foreground flex flex-col min-h-screen font-sans antialiased">
-        <ThemeProvider>
-          <Header />
-          <main className="flex-1 w-full">
-            {children}
-          </main>
-          <Footer />
-        </ThemeProvider>
+        <AuthProvider>
+          <ThemeProvider>
+            <Header />
+            <main className="flex-1 w-full">
+              {children}
+            </main>
+            <Footer />
+          </ThemeProvider>
+        </AuthProvider>
       </body>
     </html>
   );
