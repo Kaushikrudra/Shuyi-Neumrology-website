@@ -1,0 +1,146 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #0f172a;
+  --card: #ffffff;
+  --card-foreground: #0f172a;
+  --primary: #0f172a;
+  --primary-foreground: #f8fafc;
+  --secondary: #f1f5f9;
+  --secondary-foreground: #0f172a;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --border: #e2e8f0;
+  --input: #e2e8f0;
+  --ring: #94a3b8;
+}
+
+.dark {
+  --background: #09090b;
+  --foreground: #f8fafc;
+  --card: #121216;
+  --card-foreground: #f8fafc;
+  --primary: #f8fafc;
+  --primary-foreground: #0f172a;
+  --secondary: #1e293b;
+  --secondary-foreground: #f8fafc;
+  --muted: #1e293b;
+  --muted-foreground: #94a3b8;
+  --border: #27272a;
+  --input: #27272a;
+  --ring: #475569;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  min-height: 100vh;
+}
+
+/* Numerology Hero Visual Animations with Hardware Acceleration */
+@keyframes float-slow {
+  0%, 100% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -12px, 0) rotate(2deg);
+  }
+}
+
+@keyframes float-reverse {
+  0%, 100% {
+    transform: translate3d(0, 0px, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, 12px, 0) rotate(-2deg);
+  }
+}
+
+@keyframes spin-very-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin-reverse-slow {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    opacity: 0.4;
+    transform: scale3d(0.97, 0.97, 1);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale3d(1.03, 1.03, 1);
+  }
+}
+
+@keyframes orbit-pulse {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 16s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.animate-float-reverse {
+  animation: float-reverse 20s ease-in-out infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.animate-spin-very-slow {
+  animation: spin-very-slow 55s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.animate-spin-reverse-slow {
+  animation: spin-reverse-slow 70s linear infinite;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.animate-pulse-subtle {
+  animation: pulse-subtle 9s ease-in-out infinite;
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+.animate-orbit-pulse {
+  animation: orbit-pulse 12s ease-in-out infinite;
+  will-change: opacity;
+}
+
+/* Accessibility: Respect user prefers-reduced-motion setting */
+@media (prefers-reduced-motion: reduce) {
+  .animate-float-slow,
+  .animate-float-reverse,
+  .animate-spin-very-slow,
+  .animate-spin-reverse-slow,
+  .animate-pulse-subtle,
+  .animate-orbit-pulse {
+    animation: none !important;
+    transform: none !important;
+  }
+}
