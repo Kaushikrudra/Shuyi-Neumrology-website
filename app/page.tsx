@@ -10,6 +10,7 @@ import {
   CardContent,
 } from '@/components/ui/Card';
 import { NumerologyHeroAnimation } from '@/components/ui/NumerologyHeroAnimation';
+import { HeroBackgroundVideo } from '@/components/ui/HeroBackgroundVideo';
 
 export const metadata: Metadata = {
   title: 'Shuyi | Numerology & Tarot Exploration',
@@ -47,30 +48,10 @@ export default function HomePage() {
 
   return (
     <div className="w-full flex flex-col">
-      {/* Hero Section: Full-Bleed Edge-to-Edge with Video Background */}
-      <section className="relative w-full overflow-hidden">
-        {/* Background Video Layer & Ambient Overlay Container */}
-        <div className="absolute inset-0 -z-10 overflow-hidden pointer-events-none select-none">
-          {/* Static Ambient Fallback (Mobile, Reduced-Motion, & Load State) */}
-          <div className="absolute inset-0 bg-gradient-to-br from-purple-950/15 via-background to-indigo-950/20 dark:from-purple-950/40 dark:via-background dark:to-indigo-950/40" />
-
-          {/* Background Video: Autoplay, Muted, Loop, PlaysInline, Preload */}
-          <video
-            autoPlay
-            muted
-            loop
-            playsInline
-            preload="metadata"
-            className="hidden md:block motion-reduce:hidden absolute inset-0 w-full h-full object-cover object-center opacity-30 dark:opacity-35 transform-gpu pointer-events-none"
-          >
-            <source src="/videos/hero-bg.mp4" type="video/mp4" />
-          </video>
-
-          {/* Dark / Atmospheric Readability Overlay for High Text Contrast */}
-          <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/80 to-background/40 dark:from-background/95 dark:via-background/80 dark:to-background/50 pointer-events-none" />
-          <div className="absolute inset-0 bg-black/15 dark:bg-black/40 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background/90 pointer-events-none" />
-        </div>
+      {/* Hero Section: Full-Bleed Edge-to-Edge with Smooth Video Background */}
+      <section className="dark relative w-full overflow-hidden bg-[#09090b] text-foreground">
+        {/* Background Video Layer with Smooth Reload Transition */}
+        <HeroBackgroundVideo />
 
         {/* Foreground Content: Contained for readability & layout symmetry */}
         <div className="relative z-10 w-full max-w-[1760px] mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-10 sm:py-14 lg:py-18 xl:py-20">
@@ -100,7 +81,7 @@ export default function HomePage() {
               {/* Left-Aligned CTAs with matching width divider */}
               <div className="w-fit max-w-full space-y-4 pt-2">
                 <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-                  <Link href="/preview" className="w-full sm:w-auto">
+                  <Link href="/preview" prefetch={true} className="w-full sm:w-auto">
                     <Button
                       variant="primary"
                       size="lg"
@@ -109,7 +90,7 @@ export default function HomePage() {
                       Start Free Reading Preview
                     </Button>
                   </Link>
-                  <Link href="/faq" className="w-full sm:w-auto">
+                  <Link href="/faq" prefetch={true} className="w-full sm:w-auto">
                     <Button
                       variant="outline"
                       size="lg"
@@ -231,12 +212,12 @@ export default function HomePage() {
               </p>
             </div>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link href="/preview" className="w-full sm:w-auto">
+              <Link href="/preview" prefetch={true} className="w-full sm:w-auto">
                 <Button variant="primary" size="lg" className="w-full sm:w-auto px-10 py-3.5">
                   Explore Shuyi Preview
                 </Button>
               </Link>
-              <Link href="/faq" className="w-full sm:w-auto">
+              <Link href="/faq" prefetch={true} className="w-full sm:w-auto">
                 <Button variant="secondary" size="lg" className="w-full sm:w-auto px-10 py-3.5">
                   Read FAQs
                 </Button>

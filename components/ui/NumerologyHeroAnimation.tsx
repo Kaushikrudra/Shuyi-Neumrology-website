@@ -175,17 +175,21 @@ export function NumerologyHeroAnimation({ className }: { className?: string }) {
         {/* 8. Positioned Numerology Wheel Nodes */}
         {wheelNodes.map((node) => {
           const rad = (node.angle * Math.PI) / 180;
-          const x = center + radius * Math.sin(rad);
-          const y = center - radius * Math.cos(rad);
+          const x = Number((center + radius * Math.sin(rad)).toFixed(3));
+          const y = Number((center - radius * Math.cos(rad)).toFixed(3));
+          const x1 = Number((center + (radius - 22) * Math.sin(rad)).toFixed(3));
+          const y1 = Number((center - (radius - 22) * Math.cos(rad)).toFixed(3));
+          const x2 = Number((center + (radius - 6) * Math.sin(rad)).toFixed(3));
+          const y2 = Number((center - (radius - 6) * Math.cos(rad)).toFixed(3));
 
           return (
             <g key={node.num} className="transition-transform duration-300">
               {/* Soft connecting radial tick line from center */}
               <line
-                x1={center + (radius - 22) * Math.sin(rad)}
-                y1={center - (radius - 22) * Math.cos(rad)}
-                x2={center + (radius - 6) * Math.sin(rad)}
-                y2={center - (radius - 6) * Math.cos(rad)}
+                x1={x1}
+                y1={y1}
+                x2={x2}
+                y2={y2}
                 stroke="currentColor"
                 strokeWidth="1"
                 className="opacity-40"

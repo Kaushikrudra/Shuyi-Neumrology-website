@@ -75,10 +75,17 @@ In a world saturated with chaotic digital noise, moments of quiet reflection are
     - ⚡ **Soul Urge Card:** Subconscious motivations and emotional drivers derived from name vowels.
   - **One-Click Recalculation:** Effortlessly calculate readings for different profiles.
 
-### Future Roadmap (Phases 4 & 5)
-- [ ] **Phase 4:** Interactive Tarot Card Spread Draws (3-card past/present/future and Celtic cross).
-- [ ] **Phase 4:** High-resolution downloadable PDF archetype blueprint reports.
-- [ ] **Phase 5:** Multi-profile vibrational compatibility analysis.
+### Phase 4: User Authentication & Personal Dashboard
+- **Local-First Authentication:** Credentials login and signup backed by bcrypt password hashing and NextAuth.js JWT sessions.
+- **Personal Dashboard (`/dashboard`):** Real-time display of user profile details, active session state, dynamic membership badges, and quick calculator shortcuts.
+
+### Phase 5: Membership Tiers & Simulated Upgrade Flow
+- **Transparent Pricing Page (`/pricing`):**
+  - **Free Seeker (₹0):** Essential Pythagorean calculations and baseline archetypes.
+  - **Mystic Seeker (₹199/mo) — Highlighted:** Full 78-card tarot spreads, destiny vibration analysis, and saved history.
+  - **Celestial Master (₹999 one-time):** Lifetime access, master numbers synthesis, PDF reports, and VIP badge.
+- **Simulated Checkout Modal (`components/ui/Modal.tsx`):** Zero-risk, instant upgrade experience updating user membership tier in the SQLite database (`/api/user/upgrade`).
+- **Dashboard Synchronization:** Dynamic plan badge indicators (`Free`, `Premium`, `Lifetime`) and personalized upgrade links.
 
 ---
 
@@ -193,11 +200,17 @@ npm install
 ```
 
 ### Running Development Server
-Start the local Next.js development server:
+Start the local Next.js development server with Turbopack acceleration:
 ```bash
 npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser to view the application.
+
+> 💡 **Developer Workflow & Refresh Guideline (HMR Best Practices):**
+> - **File Edits & Hot Reload:** CLI ya IDE se file edit hone ke baad terminal mein `Compiled` message aane tak 1–2 second wait karein, phir **normal refresh (`Ctrl+R` / `F5`)** use karein ya Fast Refresh (HMR) ko automatically update hone dein.
+> - **Avoid Frequent Hard Refreshes During Active Compilation:** File edit ke turant dauraan **hard-refresh (`Ctrl+Shift+R`)** karne se in-flight compilation chunk requests 404 de sakte hain kyunki browser purana cache discard kar deta hai jabki naya chunk manifest abhi compile ho raha hota hai.
+> - **Hard Refresh (`Ctrl+Shift+R`)** sirf tab karein jab genuinely CSS/JS cache purana lag raha ho. Agar zaroorat lage toh pehle dev server restart (`Ctrl+C` then `npm run dev`) kar lein.
+
 
 ### Production Build & Deployment
 Build the optimized static export / production bundle:

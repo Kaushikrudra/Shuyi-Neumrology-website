@@ -46,16 +46,22 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           name: user.name || 'Seeker',
           email: user.email,
+          plan: user.plan || 'free',
         };
       },
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, trigger, session }) {
       if (user) {
         token.id = user.id;
         token.name = user.name;
         token.email = user.email;
+        token.plan = (user as any).plan || 'free';
+      }
+      // Handle client-side session update
+      if (trigger === 'update' && session?.plan) {
+        token.plan = session.plan;
       }
       return token;
     },
@@ -63,6 +69,8 @@ export const authOptions: NextAuthOptions = {
       if (session.user && token) {
         session.user.name = token.name;
         session.user.email = token.email;
+        (session.user as any).id = token.id as string;
+        (session.user as any).plan = (token.plan as string) || 'free';
       }
       return session;
     },

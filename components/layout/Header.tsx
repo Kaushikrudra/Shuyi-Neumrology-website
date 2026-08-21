@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useSession, signOut } from 'next-auth/react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 import { Button } from '@/components/ui/Button';
@@ -9,21 +10,24 @@ import { Button } from '@/components/ui/Button';
 export function Header() {
   const { data: session, status } = useSession();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'Preview', href: '/preview' },
     { name: 'About', href: '/about' },
     { name: 'FAQ', href: '/faq' },
+    { name: 'Pricing', href: '/pricing' },
   ];
 
   return (
-    <header className="w-full border-b border-border/60 bg-background/90 backdrop-blur-sm sticky top-0 z-50 transition-colors">
+    <header className="w-full border-b border-border/60 bg-background/90 backdrop-blur-sm relative z-40 transition-colors">
       <div className="w-full px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
         {/* Brand Logo / Title */}
         <div className="flex items-center space-x-3">
           <Link
             href="/"
+            prefetch={true}
             className="flex items-center gap-2.5 text-2xl font-serif font-bold tracking-tight text-foreground hover:opacity-85 transition-opacity"
             onClick={() => setMobileMenuOpen(false)}
           >
@@ -34,15 +38,24 @@ export function Header() {
 
         {/* Desktop Navigation - Centered / Spaced */}
         <nav className="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wide">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-muted-foreground hover:text-foreground transition-colors duration-150 relative py-1 hover:after:w-full after:w-0 after:h-[2px] after:bg-primary after:absolute after:bottom-0 after:left-0 after:transition-all"
-            >
-              {link.name}
-            </Link>
-          ))}
+          {navLinks.map((link) => {
+            const isActive = pathname === link.href;
+
+            return (
+              <Link
+                key={link.href}
+                href={link.href}
+                prefetch={true}
+                className={`transition-all duration-150 relative py-1 hover:text-foreground ${
+                  isActive
+                    ? 'text-foreground font-semibold after:w-full'
+                    : 'text-muted-foreground after:w-0 hover:after:w-full'
+                } after:h-[2px] after:bg-primary after:absolute after:bottom-0 after:left-0 after:transition-all after:duration-200`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
         </nav>
 
         {/* Right actions: Auth State & ThemeToggle & Mobile Menu Button */}
@@ -55,7 +68,10 @@ export function Header() {
               <div className="flex items-center space-x-3">
                 <Link
                   href="/dashboard"
-                  className="font-medium text-foreground hover:text-primary transition-colors flex items-center gap-1.5 text-sm"
+                  prefetch={true}
+                  className={`font-medium transition-colors flex items-center gap-1.5 text-sm ${
+                    pathname === '/dashboard' ? 'text-primary font-semibold' : 'text-foreground hover:text-primary'
+                  }`}
                 >
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
                   <span>{session.user.name || 'Dashboard'}</span>
@@ -71,12 +87,12 @@ export function Header() {
               </div>
             ) : (
               <div className="flex items-center space-x-2">
-                <Link href="/login">
+                <Link href="/login" prefetch={true}>
                   <Button variant="outline" size="sm" className="text-xs px-3 py-1.5">
                     Log In
                   </Button>
                 </Link>
-                <Link href="/signup">
+                <Link href="/signup" prefetch={true}>
                   <Button variant="primary" size="sm" className="text-xs px-3 py-1.5 shadow-xs">
                     Sign Up
                   </Button>
@@ -137,7 +153,12 @@ export function Header() {
             <Link
               key={link.href}
               href={link.href}
-              className="block px-3 py-2 rounded-lg text-base font-medium text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              prefetch={true}
+              className={`block px-3 py-2 rounded-lg text-base font-medium transition-colors ${
+                pathname === link.href
+                  ? 'bg-secondary text-foreground font-semibold'
+                  : 'text-muted-foreground hover:text-foreground hover:bg-secondary'
+              }`}
               onClick={() => setMobileMenuOpen(false)}
             >
               {link.name}
@@ -150,6 +171,7 @@ export function Header() {
               <>
                 <Link
                   href="/dashboard"
+                  prefetch={true}
                   className="block px-3 py-2 rounded-lg text-base font-medium text-foreground hover:bg-secondary transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -170,6 +192,7 @@ export function Header() {
               <div className="flex gap-2 pt-1">
                 <Link
                   href="/login"
+                  prefetch={true}
                   className="w-1/2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
@@ -179,6 +202,7 @@ export function Header() {
                 </Link>
                 <Link
                   href="/signup"
+                  prefetch={true}
                   className="w-1/2"
                   onClick={() => setMobileMenuOpen(false)}
                 >
