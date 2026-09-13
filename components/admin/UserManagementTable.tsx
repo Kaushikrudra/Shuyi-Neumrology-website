@@ -208,6 +208,7 @@ export function UserManagementTable({
                             onChange={(e) =>
                               handleRoleChange(user.id, e.target.value)
                             }
+                            aria-label={`Change role for ${user.name || user.email}`}
                             className="text-xs h-8 rounded border border-input bg-card px-2 text-foreground focus:outline-none focus:ring-1 focus:ring-ring cursor-pointer disabled:opacity-50"
                           >
                             <option value="user">user</option>

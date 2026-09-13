@@ -273,6 +273,7 @@ export function FaqManagement({ initialFaqs }: FaqManagementProps) {
                   size="sm"
                   onClick={() => openEditModal(faq)}
                   className="text-xs px-2.5 py-1 h-8"
+                  aria-label={`Edit FAQ: ${faq.question}`}
                 >
                   Edit
                 </Button>
@@ -281,6 +282,7 @@ export function FaqManagement({ initialFaqs }: FaqManagementProps) {
                   size="sm"
                   onClick={() => openDeleteModal(faq)}
                   className="text-xs px-2.5 py-1 h-8 text-red-600 dark:text-red-400 hover:bg-red-500/10 border-red-500/20"
+                  aria-label={`Delete FAQ: ${faq.question}`}
                 >
                   Delete
                 </Button>
@@ -310,10 +312,11 @@ export function FaqManagement({ initialFaqs }: FaqManagementProps) {
           )}
 
           <div className="space-y-1">
-            <label className="block text-xs font-semibold text-foreground">
+            <label htmlFor="faq-question-input" className="block text-xs font-semibold text-foreground">
               Question Title
             </label>
             <input
+              id="faq-question-input"
               type="text"
               value={question}
               onChange={(e) => setQuestion(e.target.value)}
@@ -323,10 +326,11 @@ export function FaqManagement({ initialFaqs }: FaqManagementProps) {
           </div>
 
           <div className="space-y-1">
-            <label className="block text-xs font-semibold text-foreground">
+            <label htmlFor="faq-answer-input" className="block text-xs font-semibold text-foreground">
               Detailed Answer
             </label>
             <textarea
+              id="faq-answer-input"
               rows={4}
               value={answer}
               onChange={(e) => setAnswer(e.target.value)}
@@ -336,10 +340,11 @@ export function FaqManagement({ initialFaqs }: FaqManagementProps) {
           </div>
 
           <div className="w-36 space-y-1">
-            <label className="block text-xs font-semibold text-foreground">
+            <label htmlFor="faq-order-input" className="block text-xs font-semibold text-foreground">
               Display Order
             </label>
             <input
+              id="faq-order-input"
               type="number"
               value={order}
               onChange={(e) => setOrder(e.target.value)}

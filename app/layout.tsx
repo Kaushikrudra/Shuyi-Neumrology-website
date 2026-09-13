@@ -23,8 +23,53 @@ const cormorant = Cormorant_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: 'Shuyi - Tarot & Numerology Preview',
-  description: 'Personal portfolio project featuring tarot and numerology preview tools.',
+  metadataBase: new URL(
+    process.env.NEXTAUTH_URL || 'https://shuyi-numerology.vercel.app'
+  ),
+  title: {
+    default: 'Shuyi — Numerology & Tarot Exploration',
+    template: '%s | Shuyi',
+  },
+  description:
+    'Harmonizing ancient Pythagorean mathematics with reflective tarot symbolism and timeless editorial design. Explore Life Paths, Destiny Expression, and archetypal frequencies.',
+  keywords: [
+    'numerology',
+    'tarot',
+    'life path calculator',
+    'pythagorean numerology',
+    'archetypes',
+    'destiny number',
+    'soul urge',
+  ],
+  authors: [{ name: 'Kaushikrudra', url: 'https://github.com/Kaushikrudra' }],
+  openGraph: {
+    title: 'Shuyi — Numerology & Tarot Exploration',
+    description:
+      'Harmonizing ancient Pythagorean mathematics with reflective tarot symbolism and timeless editorial design.',
+    url: '/',
+    siteName: 'Shuyi',
+    images: [
+      {
+        url: '/hero-poster.webp',
+        width: 1200,
+        height: 630,
+        alt: 'Shuyi Celestial Astrolabe & Sacred Numerology',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Shuyi — Numerology & Tarot Exploration',
+    description:
+      'Harmonizing ancient Pythagorean mathematics with reflective tarot symbolism and timeless editorial design.',
+    images: ['/hero-poster.webp'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   icons: {
     icon: [
       { url: '/files/favicon.ico', sizes: 'any' },

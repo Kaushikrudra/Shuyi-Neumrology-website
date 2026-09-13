@@ -1,302 +1,242 @@
-# ✨ Shuyi (数意) — Numerology & Tarot Exploration Platform
+# ✨ Shuyi (数意) — Sacred Numerology, Tarot Exploration & Drag-and-Drop CMS Platform
 
-[![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=flat-square&logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=flat-square&logo=tailwind-css)](https://tailwindcss.com/)
-[![Prisma](https://img.shields.io/badge/Prisma-5.22-2D3748?style=flat-square&logo=prisma)](https://www.prisma.io/)
-[![NextAuth.js](https://img.shields.io/badge/NextAuth.js-v4-purple?style=flat-square&logo=next.js)](https://next-auth.js.org/)
-[![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)](#license)
+> **A full-stack, editorial web application harmonizing ancient Pythagorean mathematical algorithms with reflective tarot archetypes, role-based administration, and a modular block-based CMS.**
 
-> **Harmonizing ancient numerological mathematics with reflective tarot symbolism and timeless editorial design.**
-
-**Shuyi** is a modern, privacy-focused digital platform designed for personal introspection, archetypal discovery, and dynamic content publishing. By combining traditional Pythagorean and Chaldean reduction algorithms with tarot archetype symbolism, Shuyi delivers a quiet, high-precision environment for exploring Life Paths, Destiny Expression, and Soul Urge frequencies without noisy sensationalism or data harvesting.
-
----
-
-## 📑 Table of Contents
-
-- [✨ Shuyi (数意) — Numerology \& Tarot Exploration Platform](#-shuyi-数意--numerology--tarot-exploration-platform)
-  - [📑 Table of Contents](#-table-of-contents)
-  - [🌌 Vision \& Philosophy](#-vision--philosophy)
-  - [⚡ Core Features \& Release Phases](#-core-features--release-phases)
-    - [Phase 1: Foundations \& Design Language](#phase-1-foundations--design-language)
-    - [Phase 2: Editorial Atmosphere \& Full-Bleed Experience](#phase-2-editorial-atmosphere--full-bleed-experience)
-    - [Phase 3: Interactive Calculation Engine](#phase-3-interactive-calculation-engine)
-    - [Phase 4: User Authentication \& Personal Dashboard](#phase-4-user-authentication--personal-dashboard)
-    - [Phase 5: Membership Tiers \& Simulated Upgrade Flow](#phase-5-membership-tiers--simulated-upgrade-flow)
-    - [Phase 6: Admin Dashboard \& Content Management (RBAC)](#phase-6-admin-dashboard--content-management-rbac)
-    - [Phase 7: Drag-and-Drop CMS Mini-version \& Dynamic Publishing](#phase-7-drag-and-drop-cms-mini-version--dynamic-publishing)
-  - [🔢 Numerology Calculation Engine](#-numerology-calculation-engine)
-    - [1. Pythagorean Letter Conversion Chart](#1-pythagorean-letter-conversion-chart)
-    - [2. Life Path Number](#2-life-path-number)
-    - [3. Expression (Destiny) Number](#3-expression-destiny-number)
-    - [4. Soul Urge (Heart's Desire) Number](#4-soul-urge-hearts-desire-number)
-    - [5. Master Numbers (11, 22, 33)](#5-master-numbers-11-22-33)
-  - [🧱 CMS Block Architecture \& Publishing System](#-cms-block-architecture--publishing-system)
-  - [🛠️ Tech Stack](#️-tech-stack)
-  - [📂 Project Architecture](#-project-architecture)
-  - [🚀 Getting Started](#-getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-    - [Database Synchronization](#database-synchronization)
-    - [Running Development Server](#running-development-server)
-    - [Production Build \& Verification](#production-build--verification)
-  - [🎨 Performance \& Engineering Highlights](#-performance--engineering-highlights)
-  - [🔒 Privacy \& Security by Design](#-privacy--security-by-design)
-  - [📄 License](#-license)
+[![Next.js](https://img.shields.io/badge/Next.js-14.2-black?style=for-the-badge&logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)](https://tailwindcss.com/)
+[![Prisma](https://img.shields.io/badge/Prisma-5.22-2D3748?style=for-the-badge&logo=prisma)](https://www.prisma.io/)
+[![NextAuth.js](https://img.shields.io/badge/NextAuth.js-v4-purple?style=for-the-badge&logo=next.js)](https://next-auth.js.org/)
+[![SQLite](https://img.shields.io/badge/SQLite-Local_DB-003B57?style=for-the-badge&logo=sqlite)](https://www.sqlite.org/)
+[![Recharts](https://img.shields.io/badge/Recharts-Analytics-22c55e?style=for-the-badge)](https://recharts.org/)
+[![License](https://img.shields.io/badge/License-MIT-amber?style=for-the-badge)](#license)
 
 ---
 
-## 🌌 Vision & Philosophy
+## 📖 Overview
 
-In a world saturated with chaotic digital noise, moments of quiet reflection are rare. Traditional spiritual and esoteric tools often suffer from sensationalized fortune-telling, clutter, and aggressive monetization.
+**Shuyi (数意)** is a modern, privacy-first digital sanctuary designed for introspective numerological inquiry, tarot contemplation, and custom editorial publishing. 
 
-**Shuyi** takes an architectural, tools-first approach to personal exploration:
-- **Introspective Prompts, Not Determinism:** Numerology and tarot are treated as archetypal mirrors—symbolic frameworks that stimulate critical self-reflection, mindfulness, and intuitive clarity.
-- **Editorial Typography:** High-contrast serif headlines paired with serene, modern sans-serif body text create a calm, library-like atmosphere.
-- **Mathematical Precision:** Strictly verified Pythagorean reduction algorithms that respect master number conventions.
-- **Modular Content Management:** Intuitive drag-and-drop page creation for editorial insights, articles, and landing pages.
+Unlike conventional fortune-telling sites that rely on loud ads, deterministic claims, or telemetry tracking, Shuyi treats numbers as archetypal mirrors. Combining traditional Pythagorean reduction mathematics with clean editorial typography and an intuitive drag-and-drop block CMS, Shuyi provides an atmospheric, library-like experience built with modern web standards.
 
 ---
 
-## ⚡ Core Features & Release Phases
+## ⚡ Core Features & Capabilities
 
-### Phase 1: Foundations & Design Language
-- **Dual Theme System:** System-aware Light and Dark mode with instantaneous zero-flicker client hydration and local persistence.
-- **Celestial Astrolabe Visual (`NumerologyHeroAnimation`):** Multi-layered concentric SVG astrolabe featuring orbiting numerology glyphs, cardinal axis indicators, and counter-rotating sacred geometry.
-- **Accessible UI Primitives:** Standardized, reusable components for buttons, input fields, cards, modals, and animated accordions.
+### 🔢 1. Interactive Pythagorean Numerology Engine
+- **Life Path Calculation:** Reduces birth year, month, and day independently before final synthesis.
+- **Destiny (Expression) Analysis:** Sums full name characters using standard Pythagorean letter-to-digit conversion.
+- **Soul Urge Frequency:** Isolates vowel resonance ($A, E, I, O, U$) to decode intrinsic subconscious drivers.
+- **Master Number Preservation:** Accurately identifies and honors higher-octave master numbers (`11`, `22`, `33`) without single-digit reduction.
+- **Client-Side Calculation Sandbox:** 100% private in-browser math execution—no personal birth data is sent over the network.
 
-### Phase 2: Editorial Atmosphere & Full-Bleed Experience
-- **Full-Bleed Video Hero Section:** Seamless edge-to-edge cinematic video layer with atmospheric ambient gradients and dark readability overlays.
-- **About Page (`/about`):** Detailed mission, core values (Mindful Simplicity, Respect for Archetypes, Privacy by Default), and methodology breakdown.
-- **FAQ Page (`/faq`):** Interactive accordion interface explaining Pythagorean math, master numbers, and data privacy.
+### 🔐 2. Authentication & Personal Sanctuary
+- **Credentials-Based Auth:** Secure registration and login backed by bcrypt password hashing and NextAuth.js JWT sessions.
+- **Member Dashboard (`/dashboard`):** Real-time profile details, active session management, tier badges, and quick calculator actions.
 
-### Phase 3: Interactive Calculation Engine
-- **Dedicated Interactive Route (`/preview`):**
-  - **Dynamic Input Form:** Name and Birth Date fields with instant client-side validation.
-  - **Simulated Intuitive Synthesizer:** Smooth visual state transition guiding the user through reduction steps.
-  - **Vibrational Blueprint Cards:**
-    - 🌍 **Life Path Number Card:** Foundational journey and lesson frequency derived from birth date.
-    - 🎯 **Destiny / Expression Card:** Natural talents and worldly potential derived from full name letters.
-    - ⚡ **Soul Urge Card:** Subconscious motivations and emotional drivers derived from name vowels.
-  - **One-Click Recalculation:** Effortlessly calculate readings for different profiles.
+### 💳 3. Multi-Tier Membership & Simulated Upgrades
+- **Tiered Offerings:**
+  - **Free Seeker (₹0):** Fundamental Pythagorean calculations and core archetype summaries.
+  - **Mystic Seeker (₹199/mo):** Full 78-card tarot arcana spreads and destiny synthesis.
+  - **Celestial Master (₹999 Lifetime):** Lifetime access, master numbers synthesis, VIP badge, and PDF exports.
+- **Zero-Risk Checkout Flow:** Interactive upgrade modal with instant database tier synchronization via `/api/user/upgrade`.
 
-### Phase 4: User Authentication & Personal Dashboard
-- **Local-First Authentication:** Credentials login and signup backed by bcrypt password hashing and NextAuth.js JWT sessions.
-- **Personal Dashboard (`/dashboard`):** Real-time display of user profile details, active session state, dynamic membership badges, and quick calculator shortcuts.
+### 🛡️ 4. Role-Based Admin Portal & Metrics
+- **Multi-Level Authorization (RBAC):** Strict hierarchy (`admin`, `editor`, `user`) protected at the edge via Next.js middleware.
+- **Executive Analytics (`/admin`):** Visual membership distribution charts powered by Recharts, user counts, and system metrics.
+- **User Directory (`/admin/users`):** Admin-exclusive table with live search, role elevation/demotion, and plan modifications.
+- **Dynamic Content & FAQ Management (`/admin/content`):** Real-time CRUD operations for public accordion items stored in SQLite.
+- **Sitewide Announcement Banners (`/admin/banners`):** Emergency broadcasts and promotional strips displayed prominently above the hero.
 
-### Phase 5: Membership Tiers & Simulated Upgrade Flow
-- **Transparent Pricing Page (`/pricing`):**
-  - **Free Seeker (₹0):** Essential Pythagorean calculations and baseline archetypes.
-  - **Mystic Seeker (₹199/mo) — Highlighted:** Full 78-card tarot spreads, destiny vibration analysis, and saved history.
-  - **Celestial Master (₹999 one-time):** Lifetime access, master numbers synthesis, PDF reports, and VIP badge.
-- **Simulated Checkout Modal:** Zero-risk, instant upgrade experience updating user membership tier in the SQLite database (`/api/user/upgrade`).
-- **Dashboard Synchronization:** Dynamic plan badge indicators (`Free`, `Premium`, `Lifetime`) and personalized upgrade links.
-
-### Phase 6: Admin Dashboard & Content Management (RBAC)
-- **Role-Based Access Control (RBAC):** Strict hierarchy (`admin`, `editor`, `user`) enforced across Next.js edge middleware and server routes.
-- **Central Admin Dashboard (`/admin`):** Executive overview with member plan distributions, recent registration tracking, and quick management links.
-- **User Directory Management (`/admin/users`):** Admin-only controls for searching users, updating membership plans, and promoting/demoting staff roles.
-- **Dynamic FAQ Content Management (`/admin/content`):** Live CRUD interface for public accordion items stored in SQLite.
-- **Sitewide Announcement Banners (`/admin/banners`):** Emergency broadcasts, promotional banners, and status alerts displayed above the hero.
-
-### Phase 7: Drag-and-Drop CMS Mini-version & Dynamic Publishing
-- **Native HTML5 Drag-and-Drop Editor (`/admin/pages/[id]/edit`):** Reorder content blocks natively without heavy third-party npm libraries.
-- **Modular Block System:**
+### 🧱 5. Native Drag-and-Drop Block CMS Mini-Version
+- **Pure Browser Drag-and-Drop:** Native HTML5 Drag and Drop API (`draggable`, `dragover`, `drop`) for block reordering without heavy third-party bundle weight.
+- **Accessible Fallbacks:** Keyboard/mobile-friendly Move Up (`↑`) and Move Down (`↓`) controls.
+- **Modular Block Types:**
   - 📝 **Text Block:** Section headings and formatted multiline body paragraphs.
-  - 🖼️ **Image Block:** Direct URL pasting, caption annotations, and accessible alt-text with live thumbnail preview.
-  - ⚡ **Call-to-Action (CTA) Block:** Compelling headlines and styled buttons linking to internal tools or external resources.
-- **Draft vs. Published Workflow:** Explicit draft preservation with one-click live publishing and unpublishing.
-- **Live Visual Preview:** In-editor preview toggle rendering the exact visitor view before changes go live.
-- **Dynamic Public Route (`app/[slug]/page.tsx`):** SEO-friendly public page rendering with automatic 404 protection for drafts and reserved route protection.
-- **Footer Showcase:** Dynamic integration displaying published editorial pages in the website footer.
+  - 🖼️ **Image Block:** URL embedding with caption annotations, alt-text, and live thumbnail previews.
+  - ⚡ **Call-to-Action (CTA) Block:** Customizable headlines and themed action buttons linking to internal tools or external URLs.
+- **Draft & Publish Workflow:** Explicit draft preservation with one-click live publishing and unpublishing.
+- **Live In-Editor Preview:** Instant split-free visual preview mode rendering exact public typography and styles.
+- **Dynamic Public Route (`/[slug]`):** Dynamic publishing with automatic 404 handling for draft states and system-reserved slugs.
+
+### 🎨 6. Design System & Accessibility
+- **Dual Mode System:** System-aware Light & Dark themes with zero hydration flicker and local persistence.
+- **Celestial Astrolabe Visual:** Multi-layered concentric SVG astrolabe with orbiting glyphs and counter-rotating sacred geometry.
+- **Responsive Layouts:** Mobile drawers, responsive tables with horizontal scroll wrappers, and accessible ARIA attributes across all forms.
+- **Resilient Error Handling:** Custom 404 page, root error boundary (`app/error.tsx`), and automated loading skeletons across all routes.
 
 ---
 
-## 🔢 Numerology Calculation Engine
+## 🖼️ Application Preview & Screenshots
 
-The engine is built in pure TypeScript (`lib/numerology.ts`) using standard Pythagorean reduction rules.
+> *Add your screenshots to the `./screenshots/` directory to display them here.*
 
-### 1. Pythagorean Letter Conversion Chart
+| Homepage & Full-Bleed Video Hero | Interactive Calculator (`/preview`) |
+| :---: | :---: |
+| ![Homepage](./screenshots/homepage.png) | ![Calculator](./screenshots/preview-calculator.png) |
 
-| Number | Letters |
-| :---: | :--- |
-| **1** | A, J, S |
-| **2** | B, K, T |
-| **3** | C, L, U |
-| **4** | D, M, V |
-| **5** | E, N, W |
-| **6** | F, O, X |
-| **7** | G, P, Y |
-| **8** | H, Q, Z |
-| **9** | I, R |
+| Member Dashboard (`/dashboard`) | Membership & Pricing (`/pricing`) |
+| :---: | :---: |
+| ![Dashboard](./screenshots/dashboard.png) | ![Pricing](./screenshots/pricing.png) |
 
-### 2. Life Path Number
-Calculated by reducing the Month, Day, and Year separately before summing and performing the final reduction:
-$$\text{Life Path} = \text{Reduce}(\text{Reduce}(\text{Month}) + \text{Reduce}(\text{Day}) + \text{Reduce}(\text{Year}))$$
-
-### 3. Expression (Destiny) Number
-Calculated by summing the numerical values of all letters in the full birth name, then reducing to a single digit (or master number).
-
-### 4. Soul Urge (Heart's Desire) Number
-Calculated by filtering only the vowels ($A, E, I, O, U$) from the full name, summing their values, and reducing.
-
-### 5. Master Numbers (11, 22, 33)
-If any step reduces to `11`, `22`, or `33`, the calculation preserves the number without further single-digit reduction:
-- **11 (The Master Intuitive):** High spiritual awareness, illumination, visionary insight.
-- **22 (The Master Architect):** Practical genius, grand scale manifestation, world-building.
-- **33 (The Master Teacher):** Universal upliftment, compassionate healing, enlightened guidance.
+| Admin Dashboard & Analytics (`/admin`) | Drag-and-Drop CMS Editor (`/admin/pages/[id]/edit`) |
+| :---: | :---: |
+| ![Admin Dashboard](./screenshots/admin-dashboard.png) | ![CMS Editor](./screenshots/cms-editor.png) |
 
 ---
 
-## 🧱 CMS Block Architecture & Publishing System
+## 🛠️ Tech Stack & Architecture
 
-Each CMS page stores blocks as an array of JSON objects inside the `CmsPage` table:
-
-```typescript
-export interface CmsBlock {
-  id: string;
-  type: 'text' | 'image' | 'cta';
-  content: Record<string, any>;
-  order: number;
-}
-```
-
-```prisma
-model CmsPage {
-  id          String   @id @default(cuid())
-  slug        String   @unique
-  title       String
-  blocks      String   // JSON string of block array
-  status      String   @default("draft") // "draft" | "published"
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-```
-
-- **Reordering:** Dragging cards updates the `order` index via native browser drag events (`dragstart`, `dragover`, `drop`). Accessible `↑` and `↓` buttons provide fallback ordering.
-- **Routing:** Any published page is instantly accessible at `https://your-domain.com/[slug]`. If a page is in `draft` status or does not exist, Next.js triggers a clean 404 (`notFound()`).
+- **Frontend Framework:** [Next.js 14](https://nextjs.org/) (App Router, Server Components & Dynamic Client Boundaries)
+- **Language:** [TypeScript 5](https://www.typescriptlang.org/) (Strict Type Safety)
+- **Styling:** [Tailwind CSS 3.4](https://tailwindcss.com/) with semantic CSS theme variables
+- **Typography:** [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) (Serif Headlines) & [Inter](https://fonts.google.com/specimen/Inter) (Sans Body)
+- **Database & ORM:** [Prisma ORM](https://www.prisma.io/) paired with local [SQLite](https://www.sqlite.org/) (`prisma/dev.db`)
+- **Authentication:** [NextAuth.js v4](https://next-auth.js.org/) (Credentials Provider with bcrypt password hashing & JWT tokens)
+- **Data Visualization:** [Recharts](https://recharts.org/) (Plan distribution charts)
+- **SEO & Routing:** Next.js Dynamic Metadata, OpenGraph & Twitter Cards, `sitemap.ts`, and `robots.ts`
 
 ---
 
-## 🛠️ Tech Stack
-
-- **Core Framework:** [Next.js 14](https://nextjs.org/) (App Router, Server Components & Dynamic Client Boundaries)
-- **Language:** [TypeScript 5](https://www.typescriptlang.org/) (Strict Mode)
-- **Database & ORM:** [Prisma ORM](https://www.prisma.io/) with local [SQLite](https://www.sqlite.org/) (`dev.db`)
-- **Authentication:** [NextAuth.js v4](https://next-auth.js.org/) (Credentials Provider, JWT Sessions, RBAC)
-- **Styling:** [Tailwind CSS 3.4](https://tailwindcss.com/) with custom CSS Theme Variables
-- **Typography:** [Cormorant Garamond](https://fonts.google.com/specimen/Cormorant+Garamond) (Serif) & [Inter](https://fonts.google.com/specimen/Inter) (Sans)
-- **Animations:** CSS3 3D Transforms, Hardware-accelerated Keyframes, SVG Astrolabe Engine
-- **Linting & Code Quality:** ESLint with Next.js Core Web Vitals configuration
-
----
-
-## 📂 Project Architecture
+## 📂 Project Structure
 
 ```plaintext
 shuyi-numerology-website/
 ├── app/
-│   ├── [slug]/                   # Dynamic Public Route for Published CMS Pages (Phase 7)
+│   ├── [slug]/                   # Dynamic Public CMS Pages Route
+│   │   ├── loading.tsx
 │   │   └── page.tsx
 │   ├── about/                    # About & Philosophy Page
-│   │   └── page.tsx
-│   ├── admin/                    # Admin Portal (Phase 6 & 7)
-│   │   ├── banners/              # Announcement Banner Management
+│   ├── admin/                    # Admin Portal
+│   │   ├── banners/              # Announcement Banners Management
 │   │   ├── content/              # Dynamic FAQ Management
 │   │   ├── pages/                # CMS Page Listing & Creator
 │   │   │   ├── [id]/edit/        # Drag-and-Drop Block Editor & Live Preview
 │   │   │   └── page.tsx
-│   │   ├── users/                # User & Role Management (Admin only)
+│   │   ├── users/                # User & Role Directory (Admin only)
 │   │   ├── layout.tsx            # Admin authentication & RBAC boundary
+│   │   ├── loading.tsx           # Admin loading skeleton
 │   │   └── page.tsx              # Analytics dashboard & metrics overview
 │   ├── api/
-│   │   ├── admin/                # Secure admin endpoints (Banners, FAQ, Users, CMS)
-│   │   ├── auth/                 # NextAuth handlers & signup
-│   │   └── user/upgrade/         # Membership upgrade endpoint
-│   ├── dashboard/                # User account portal
-│   ├── faq/                      # Public FAQ page
-│   ├── login/ & signup/          # Authentication flows
-│   ├── preview/                  # Numerology calculation engine
-│   ├── pricing/                  # Membership plans & upgrade modal
-│   ├── globals.css               # Theme variables & GPU animations
-│   ├── layout.tsx                # Root layout with Header & Footer
-│   └── page.tsx                  # Full-bleed Video Hero Homepage
+│   │   ├── admin/                # Secure Admin API endpoints (Banners, FAQ, Users, CMS)
+│   │   ├── auth/                 # NextAuth route handler & signup endpoint
+│   │   └── user/upgrade/         # Membership upgrade handler
+│   ├── dashboard/                # User Account & Sanctuary Portal
+│   ├── faq/                      # Public FAQ & Methodology
+│   ├── login/ & signup/          # Authentication pages
+│   ├── preview/                  # Interactive Numerology Calculator
+│   ├── pricing/                  # Membership Tiers & Upgrade Modal
+│   ├── error.tsx                 # Root Error Boundary
+│   ├── globals.css               # Theme tokens & GPU keyframe animations
+│   ├── layout.tsx                # Root layout with Header, Footer, SEO & OG Tags
+│   ├── loading.tsx               # Global loading state
+│   ├── not-found.tsx             # Custom 404 Not Found screen
+│   ├── page.tsx                  # Video Hero Landing Page
+│   ├── robots.ts                 # Search engine crawler policies
+│   └── sitemap.ts                # Dynamic XML sitemap generator
 ├── components/
-│   ├── admin/                    # Admin sidebar, table, and editor components
+│   ├── admin/                    # Admin sidebar, tables, charts, and CMS editor
 │   ├── cms/                      # Shared public block renderer
-│   ├── layout/                   # Global Header & Footer
-│   └── ui/                       # Accessible design system primitives
+│   ├── layout/                   # Header & dynamic Footer showcase
+│   └── ui/                       # Accessible design primitives (Button, Card, Input, Modal)
 ├── lib/
-│   ├── auth.ts                   # NextAuth configuration
-│   ├── auth-utils.ts             # RBAC role checking helpers
-│   ├── cms-types.ts              # CMS block interfaces & slugification
-│   ├── numerology.ts             # Pythagorean calculation engine
+│   ├── auth.ts                   # NextAuth options & credentials provider
+│   ├── auth-utils.ts             # Role-based authorization helpers
+│   ├── cms-types.ts              # Block interfaces & slug sanitization
+│   ├── numerology.ts             # Pythagorean mathematical engine
 │   └── prisma.ts                 # Prisma Client singleton
 ├── prisma/
-│   ├── schema.prisma             # User, FaqItem, Banner, CmsPage models
+│   ├── schema.prisma             # User, FaqItem, Banner, CmsPage schema
 │   └── dev.db                    # Local SQLite database
-├── middleware.ts                 # Next.js edge route protection & RBAC
-├── public/                       # Favicons, posters, videos
-├── scripts/                      # Seed & management utilities
-├── package.json
+├── middleware.ts                 # Edge route protection & RBAC
+├── public/                       # Favicons, posters, video assets
+├── scripts/                      # Admin promotion & database seed utilities
 └── README.md
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Local Development Setup
 
-### Prerequisites
-- Node.js 18.17+ or higher
-- npm 9+ or yarn / pnpm
+Follow these steps to run Shuyi locally on your machine:
 
-### Installation
-Clone the repository and install project dependencies:
+### 1. Prerequisites
+- **Node.js**: `v18.17.0` or higher
+- **npm**: `v9.0.0` or higher (or `pnpm` / `yarn`)
+- **Git**
+
+### 2. Clone Repository
 ```bash
 git clone https://github.com/Kaushikrudra/Shuyi-Neumrology-website.git
 cd Shuyi-Neumrology-website
+```
+
+### 3. Install Dependencies
+```bash
 npm install
 ```
 
-### Database Synchronization
-Generate the Prisma Client and sync the SQLite database:
+### 4. Configure Environment Variables
+Create a local `.env` file in the root directory:
+```env
+DATABASE_URL="file:./dev.db"
+NEXTAUTH_SECRET="your-development-secret-key-replace-in-production"
+NEXTAUTH_URL="http://localhost:3000"
+```
+
+### 5. Initialize Database & Seed Content
+Push the Prisma schema to generate the local SQLite database and populate baseline content:
 ```bash
 npx prisma db push
 npx prisma generate
+node scripts/seed-faq.mjs
 ```
 
-### Running Development Server
-Start the local Next.js development server:
+*(Optional)* To elevate any registered account to the **Admin** role:
+```bash
+node scripts/make-admin.mjs <your-account-email>
+```
+
+### 6. Start Development Server
 ```bash
 npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### Production Build & Verification
-Build the optimized production bundle and verify all routes:
+### 7. Verification & Production Build
+To verify type correctness, linting rules, and build output:
 ```bash
-npm run build
 npm run lint
-npm start
+npm run build
 ```
 
 ---
 
-## 🎨 Performance & Engineering Highlights
+## 💡 Engineering Highlights & Case Study Reflections
 
-1. **Native Drag & Drop:** Pure browser HTML5 Drag and Drop API avoids heavy third-party dependencies, keeping bundle sizes under 100kB First Load JS.
-2. **GPU Acceleration:** All continuous rotation and pulsing animations use `translate3d(0,0,0)`, `will-change: transform`, and `backface-visibility: hidden` for 60fps rendering.
-3. **Edge Route Protection:** Low-latency Next.js edge middleware checks user session and role tokens before page rendering begins.
-4. **Resilient Public Routing:** Automatic reserved-route checking prevents CMS pages from accidentally shadowing system endpoints like `/login`, `/admin`, or `/pricing`.
+### 1. Native Drag-and-Drop vs. Heavy External Libraries
+- **Challenge:** Implementing an intuitive, smooth block reordering editor without inflating bundle size with heavy dependencies like `react-beautiful-dnd` or `@dnd-kit`.
+- **Solution:** Utilized native HTML5 Drag and Drop APIs (`draggable`, `dragstart`, `dragover`, `drop`) synchronized with React state. Provided accessible Move Up (`↑`) and Move Down (`↓`) controls as a dual-input paradigm ensuring first-class usability on touch screens and mobile devices.
+
+### 2. Role-Based Access Control at the Edge
+- **Challenge:** Guaranteeing that non-authenticated seekers or standard users cannot access administrative views or mutate content, without adding round-trip server latency.
+- **Solution:** Enforced role tokens directly in Next.js Edge Middleware (`middleware.ts`). Routes under `/admin/*` verify `admin` or `editor` status at the edge before rendering starts, while sensitive operations like user role elevation are strictly restricted to `admin` principals.
+
+### 3. Dynamic CMS Slug Collisions & Reserved Route Shielding
+- **Challenge:** Allowing administrators to create dynamic routes (`/[slug]`) without accidentally shadowing core application routes like `/pricing`, `/faq`, or `/login`.
+- **Solution:** Introduced a system-level reserved slug registry (`RESERVED_SLUGS`) and automatic slug sanitization. Both the CMS API and the dynamic route handler gracefully intercept reserved words and un-published draft states with Next.js `notFound()` 404 responses.
+
+### 4. Zero-Flicker Theme Hydration
+- **Challenge:** Eliminating flash-of-unstyled-content (FOUC) when loading dark mode on client hydration.
+- **Solution:** Embedded an inline, zero-dependency theme injection script inside the root `<head>` that synchronizes `localStorage` preferences and system `prefers-color-scheme` before the DOM renders.
 
 ---
 
-## 🔒 Privacy & Security by Design
+## 🔒 Privacy & Security
 
-- **Role-Based Security:** Administrative endpoints require explicit `admin` or `editor` session privileges.
-- **Local-First Numerology:** Client-side calculation ensures sensitive birth dates and personal names remain private.
-- **Zero Third-Party Trackers:** No tracking pixels, external ad networks, or telemetry scripts.
+- **Local Calculation Engine:** Sensitive birth dates and names are evaluated strictly in the user's browser runtime.
+- **Zero Third-Party Trackers:** No Google Analytics, Meta Pixel, or data brokering scripts.
+- **Password Security:** Credentials hashed using industry-standard `bcryptjs` salt rounds before database storage.
 
 ---
 
@@ -306,4 +246,6 @@ Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ---
 
-*Designed and developed with mathematical precision and timeless aesthetics by [Kaushikrudra](https://github.com/Kaushikrudra).*
+<p align="center">
+  <em>Crafted with architectural care, mathematical precision, and timeless aesthetics by <a href="https://github.com/Kaushikrudra">Kaushikrudra</a>.</em>
+</p>

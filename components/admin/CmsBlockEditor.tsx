@@ -428,7 +428,7 @@ export function CmsBlockEditor({ initialPage }: CmsBlockEditorProps) {
       {/* VIEW: EDIT BLOCKS (DRAG AND DROP) */}
       {activeTab === 'edit' && (
         <div className="space-y-6">
-          <div className="flex items-center justify-between">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
             <div>
               <h2 className="text-lg font-semibold text-foreground">
                 Page Blocks ({blocks.length})
@@ -439,7 +439,7 @@ export function CmsBlockEditor({ initialPage }: CmsBlockEditorProps) {
             </div>
 
             {/* Quick Add Block Bar */}
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2 w-full sm:w-auto">
               <Button
                 type="button"
                 variant="outline"
@@ -537,6 +537,9 @@ export function CmsBlockEditor({ initialPage }: CmsBlockEditorProps) {
                             onDragEnd={handleDragEnd}
                             className="cursor-grab active:cursor-grabbing p-1.5 rounded-md hover:bg-secondary text-muted-foreground hover:text-foreground transition-colors"
                             title="Drag to reorder"
+                            aria-label={`Drag to reorder block ${index + 1}`}
+                            role="button"
+                            tabIndex={0}
                           >
                             <svg className="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                               <path d="M7 2a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 7 14zm6-12a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 2zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 8zm0 6a2 2 0 1 0 .001 4.001A2 2 0 0 0 13 14z" />
@@ -564,6 +567,7 @@ export function CmsBlockEditor({ initialPage }: CmsBlockEditorProps) {
                             disabled={index === 0}
                             className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-secondary disabled:opacity-30 disabled:pointer-events-none transition-colors"
                             title="Move Up"
+                            aria-label={`Move block ${index + 1} up`}
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7" />
@@ -575,6 +579,7 @@ export function CmsBlockEditor({ initialPage }: CmsBlockEditorProps) {
                             disabled={index === blocks.length - 1}
                             className="p-1.5 rounded text-muted-foreground hover:text-foreground hover:bg-secondary disabled:opacity-30 disabled:pointer-events-none transition-colors"
                             title="Move Down"
+                            aria-label={`Move block ${index + 1} down`}
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
@@ -585,6 +590,7 @@ export function CmsBlockEditor({ initialPage }: CmsBlockEditorProps) {
                             onClick={() => handleDeleteBlock(index)}
                             className="p-1.5 rounded text-red-500 hover:bg-red-500/10 transition-colors ml-1"
                             title="Delete block"
+                            aria-label={`Delete block ${index + 1}`}
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
@@ -605,10 +611,14 @@ export function CmsBlockEditor({ initialPage }: CmsBlockEditorProps) {
                             }
                           />
                           <div>
-                            <label className="block text-sm font-medium text-foreground mb-1">
+                            <label
+                              htmlFor={`block-body-${block.id || index}`}
+                              className="block text-sm font-medium text-foreground mb-1"
+                            >
                               Body Content
                             </label>
                             <textarea
+                              id={`block-body-${block.id || index}`}
                               rows={4}
                               placeholder="Write your article or explanation here... Supports paragraphs."
                               value={block.content.body || ''}

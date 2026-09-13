@@ -144,14 +144,14 @@ export function PagesManagement({ initialPages }: PagesManagementProps) {
     <div className="space-y-6">
       {/* Top Action Bar */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <div className="flex flex-1 items-center gap-3 w-full sm:w-auto max-w-md">
+        <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 w-full sm:max-w-md">
           <Input
             placeholder="Search pages by title or slug..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full"
           />
-          <div className="flex items-center rounded-lg border border-input bg-card p-1 text-xs">
+          <div className="flex items-center justify-center rounded-lg border border-input bg-card p-1 text-xs shrink-0">
             {(['all', 'published', 'draft'] as const).map((filter) => (
               <button
                 key={filter}
@@ -310,6 +310,7 @@ export function PagesManagement({ initialPages }: PagesManagementProps) {
                           }}
                           className="inline-flex items-center text-xs font-medium p-1.5 rounded-md text-red-500 hover:bg-red-500/10 transition-colors"
                           title="Delete page"
+                          aria-label={`Delete page ${page.title}`}
                         >
                           <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />

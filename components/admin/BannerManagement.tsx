@@ -277,6 +277,7 @@ export function BannerManagement({ initialBanners }: BannerManagementProps) {
                     size="sm"
                     onClick={() => openEditModal(banner)}
                     className="text-xs px-2.5 py-1 h-8"
+                    aria-label={`Edit banner ${banner.title}`}
                   >
                     Edit
                   </Button>
@@ -285,6 +286,7 @@ export function BannerManagement({ initialBanners }: BannerManagementProps) {
                     size="sm"
                     onClick={() => openDeleteModal(banner)}
                     className="text-xs px-2.5 py-1 h-8 text-red-600 dark:text-red-400 hover:bg-red-500/10 border-red-500/20"
+                    aria-label={`Delete banner ${banner.title}`}
                   >
                     Delete
                   </Button>
@@ -315,10 +317,11 @@ export function BannerManagement({ initialBanners }: BannerManagementProps) {
           )}
 
           <div className="space-y-1">
-            <label className="block text-xs font-semibold text-foreground">
+            <label htmlFor="banner-title-input" className="block text-xs font-semibold text-foreground">
               Banner Title / Tag
             </label>
             <input
+              id="banner-title-input"
               type="text"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
@@ -328,10 +331,11 @@ export function BannerManagement({ initialBanners }: BannerManagementProps) {
           </div>
 
           <div className="space-y-1">
-            <label className="block text-xs font-semibold text-foreground">
+            <label htmlFor="banner-message-input" className="block text-xs font-semibold text-foreground">
               Banner Message Text
             </label>
             <textarea
+              id="banner-message-input"
               rows={3}
               value={message}
               onChange={(e) => setMessage(e.target.value)}
