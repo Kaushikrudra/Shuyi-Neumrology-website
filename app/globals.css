@@ -171,6 +171,26 @@ body {
   will-change: opacity;
 }
 
+/* Ensure SVG rotation elements use GPU layer & precise transform-origin */
+svg .animate-spin-very-slow,
+svg .animate-spin-reverse-slow {
+  transform-box: fill-box;
+  transform-origin: center;
+  backface-visibility: hidden;
+}
+
+/* Video smooth hardware rasterization */
+video {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Performance: Defer off-screen rendering */
+.content-visibility-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 400px;
+}
+
 /* Accessibility: Respect user prefers-reduced-motion setting */
 @media (prefers-reduced-motion: reduce) {
   .animate-float-slow,
@@ -178,7 +198,8 @@ body {
   .animate-spin-very-slow,
   .animate-spin-reverse-slow,
   .animate-pulse-subtle,
-  .animate-orbit-pulse {
+  .animate-orbit-pulse,
+  .animate-page-enter {
     animation: none !important;
     transform: none !important;
   }

@@ -11,6 +11,8 @@ import {
 } from '@/components/ui/Card';
 import { NumerologyHeroAnimation } from '@/components/ui/NumerologyHeroAnimation';
 import { HeroBackgroundVideo } from '@/components/ui/HeroBackgroundVideo';
+import { AnnouncementBanner } from '@/components/ui/AnnouncementBanner';
+import { prisma } from '@/lib/prisma';
 
 export const metadata: Metadata = {
   title: 'Shuyi | Numerology & Tarot Exploration',
@@ -18,7 +20,26 @@ export const metadata: Metadata = {
     'Discover ancient wisdom through modern numerology calculations, tarot archetypes, and personalized intuitive previews.',
 };
 
-export default function HomePage() {
+// ISR: Cache pre-rendered page and revalidate in background every 60s
+export const revalidate = 60;
+
+export default async function HomePage() {
+  // Fetch active announcement banner if any
+  let activeBanner = null;
+  try {
+    activeBanner = await prisma.banner.findFirst({
+      where: { isActive: true },
+      orderBy: { createdAt: 'desc' },
+      select: {
+        id: true,
+        title: true,
+        message: true,
+      },
+    });
+  } catch (err) {
+    console.error('Error fetching active banner:', err);
+  }
+
   const features = [
     {
       icon: '🔢',
@@ -48,6 +69,9 @@ export default function HomePage() {
 
   return (
     <div className="w-full flex flex-col">
+      {/* Sitewide Announcement Strip (if banner isActive=true) */}
+      <AnnouncementBanner banner={activeBanner} />
+
       {/* Hero Section: Full-Bleed Edge-to-Edge with Smooth Video Background */}
       <section className="dark relative w-full overflow-hidden bg-[#09090b] text-foreground">
         {/* Background Video Layer with Smooth Reload Transition */}
@@ -168,7 +192,7 @@ export default function HomePage() {
       {/* Main Content Sections (Contained Layout) */}
       <div className="w-full max-w-[1760px] mx-auto px-3 sm:px-4 lg:px-6 xl:px-8 py-14 sm:py-20 space-y-16 sm:space-y-24">
         {/* Features Section */}
-        <section className="space-y-10 w-full">
+        <section className="space-y-10 w-full content-visibility-auto">
           <div className="text-center space-y-3 max-w-3xl mx-auto px-4">
             <h2 className="font-serif text-3xl sm:text-4xl font-bold tracking-tight text-foreground">
               Designed for Intuitive Self-Discovery
@@ -200,7 +224,7 @@ export default function HomePage() {
         </section>
 
         {/* Bottom CTA Band */}
-        <section className="w-full">
+        <section className="w-full content-visibility-auto">
           <div className="rounded-2xl border border-border bg-card p-8 sm:p-14 text-center space-y-6 shadow-sm">
             <div className="max-w-2xl mx-auto space-y-3">
               <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-foreground">

@@ -3,19 +3,23 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "rm -rf .next && next dev --turbo",
-    "dev:webpack": "rm -rf .next && next dev",
+    "dev": "next dev",
+    "dev:turbo": "next dev --turbo",
+    "dev:clean": "rm -rf .next && next dev",
     "clean": "rm -rf .next",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "make-admin": "node scripts/make-admin.mjs",
+    "seed:faq": "node scripts/seed-faq.mjs"
   },
   "dependencies": {
     "bcryptjs": "^3.0.3",
     "next": "^14.2.15",
     "next-auth": "^4.24.15",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "recharts": "^3.10.1"
   },
   "devDependencies": {
     "@prisma/client": "^5.22.0",

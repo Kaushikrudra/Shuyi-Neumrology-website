@@ -135,8 +135,8 @@ export default function PricingPage() {
     setErrorMsg(null);
 
     try {
-      // Thoughtful simulated processing delay (1.2s)
-      await new Promise((resolve) => setTimeout(resolve, 1200));
+      // Snappy, smooth confirmation delay
+      await new Promise((resolve) => setTimeout(resolve, 300));
 
       const response = await fetch('/api/user/upgrade', {
         method: 'POST',

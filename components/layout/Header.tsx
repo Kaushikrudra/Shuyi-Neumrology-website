@@ -76,6 +76,20 @@ export function Header() {
                   <span className="w-2 h-2 rounded-full bg-emerald-500" />
                   <span>{session.user.name || 'Dashboard'}</span>
                 </Link>
+                {((session.user as any)?.role === 'admin' || (session.user as any)?.role === 'editor') && (
+                  <Link
+                    href="/admin"
+                    prefetch={true}
+                    className={`text-xs px-2.5 py-1.5 rounded-md font-medium border transition-colors flex items-center gap-1 ${
+                      pathname.startsWith('/admin')
+                        ? 'bg-purple-500/20 text-purple-600 dark:text-purple-400 border-purple-500/40 font-semibold'
+                        : 'bg-secondary text-foreground hover:bg-purple-500/10 hover:text-purple-600 border-border'
+                    }`}
+                  >
+                    <span>⚡</span>
+                    <span>Admin</span>
+                  </Link>
+                )}
                 <Button
                   onClick={() => signOut({ callbackUrl: '/' })}
                   variant="outline"
@@ -177,6 +191,16 @@ export function Header() {
                 >
                   Dashboard ({session.user.name || 'Account'})
                 </Link>
+                {((session.user as any)?.role === 'admin' || (session.user as any)?.role === 'editor') && (
+                  <Link
+                    href="/admin"
+                    prefetch={true}
+                    className="block px-3 py-2 rounded-lg text-base font-medium text-purple-600 dark:text-purple-400 bg-purple-500/10 hover:bg-purple-500/20 transition-colors"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    ⚡ Admin Panel
+                  </Link>
+                )}
                 <button
                   type="button"
                   onClick={() => {

@@ -47,6 +47,7 @@ export const authOptions: NextAuthOptions = {
           name: user.name || 'Seeker',
           email: user.email,
           plan: user.plan || 'free',
+          role: user.role || 'user',
         };
       },
     }),
@@ -58,10 +59,12 @@ export const authOptions: NextAuthOptions = {
         token.name = user.name;
         token.email = user.email;
         token.plan = (user as any).plan || 'free';
+        token.role = (user as any).role || 'user';
       }
       // Handle client-side session update
-      if (trigger === 'update' && session?.plan) {
-        token.plan = session.plan;
+      if (trigger === 'update') {
+        if (session?.plan) token.plan = session.plan;
+        if (session?.role) token.role = session.role;
       }
       return token;
     },
@@ -71,6 +74,7 @@ export const authOptions: NextAuthOptions = {
         session.user.email = token.email;
         (session.user as any).id = token.id as string;
         (session.user as any).plan = (token.plan as string) || 'free';
+        (session.user as any).role = (token.role as string) || 'user';
       }
       return session;
     },

@@ -55,17 +55,17 @@ export default function PreviewPage() {
     setIsCalculating(true);
     setCalculationStep('Calculating Pythagorean reductions...');
 
-    // Thoughtful simulated animation delay
+    // Responsive, smooth micro-transition
     setTimeout(() => {
       setCalculationStep('Synthesizing archetypal vibrations...');
-    }, 450);
+    }, 120);
 
     setTimeout(() => {
       const profile = calculateFullProfile(fullName, dateOfBirth);
       setResult(profile);
       setIsCalculating(false);
       setCalculationStep('');
-    }, 900);
+    }, 250);
   };
 
   const handleReset = () => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import { prisma } from '@/lib/prisma';
 import {
   Accordion,
   AccordionItem,
@@ -16,45 +17,75 @@ export const metadata: Metadata = {
     'Frequently asked questions about numerology calculations, tarot symbolism, and how the Shuyi platform works.',
 };
 
-export default function FAQPage() {
-  const faqItems = [
-    {
-      id: 'faq-1',
-      question: 'How do the Numerology calculations work?',
-      answer:
-        'Shuyi utilizes standard Pythagorean numerological reduction. For birth dates, numbers are summed across day, month, and year until reduced to a single digit (1–9) or preserved as master numbers (11, 22, 33). For names, letters are mapped to their traditional numeric vibration values.',
-    },
-    {
-      id: 'faq-2',
-      question: 'What is the difference between Life Path, Destiny, and Soul Urge?',
-      answer:
-        'Your Life Path number reflects your core life journey and primary lessons derived from your birth date. The Destiny (Expression) number reveals your natural talents based on all letters of your full name. The Soul Urge (Heart’s Desire) number is calculated from vowels, uncovering subconscious motivations.',
-    },
-    {
-      id: 'faq-3',
-      question: 'How are Tarot cards drawn in the preview tool?',
-      answer:
-        'Tarot draws are based on the traditional 78-card archetypes (Major and Minor Arcana). The preview tool randomly draws archetypal symbols accompanied by upright and reversed contemplative interpretations.',
-    },
-    {
-      id: 'faq-4',
-      question: 'Is my personal birth date and name data stored on any server?',
-      answer:
-        'No. In this Phase 2 foundation, all calculations and preview features are strictly client-side. Your inputs stay entirely within your browser session and are not transmitted to any external server or database.',
-    },
-    {
-      id: 'faq-5',
-      question: 'How does the Light / Dark mode theme preference work?',
-      answer:
-        'The theme toggle in the header adapts to your preference using Tailwind CSS class-based switching. Your chosen mode is saved in localStorage and persists across page reloads. If no preference is selected, it defaults to your operating system’s theme.',
-    },
-    {
-      id: 'faq-6',
-      question: 'What features are planned for future phases?',
-      answer:
-        'Phase 3 will introduce interactive calculation tools for Life Path and Tarot card spreads. Phase 4 will introduce detailed PDF/printable reports, and Phase 5 will add advanced compatibility algorithms.',
-    },
-  ];
+// ISR: Cache pre-rendered FAQ page and revalidate in background every 60s
+export const revalidate = 60;
+
+const FALLBACK_FAQS = [
+  {
+    id: 'fallback-1',
+    question: 'How do the Numerology calculations work?',
+    answer:
+      'Shuyi utilizes standard Pythagorean numerological reduction. For birth dates, numbers are summed across day, month, and year until reduced to a single digit (1–9) or preserved as master numbers (11, 22, 33). For names, letters are mapped to their traditional numeric vibration values.',
+    order: 1,
+  },
+  {
+    id: 'fallback-2',
+    question: 'What is the difference between Life Path, Destiny, and Soul Urge?',
+    answer:
+      'Your Life Path number reflects your core life journey and primary lessons derived from your birth date. The Destiny (Expression) number reveals your natural talents based on all letters of your full name. The Soul Urge (Heart’s Desire) number is calculated from vowels, uncovering subconscious motivations.',
+    order: 2,
+  },
+  {
+    id: 'fallback-3',
+    question: 'How are Tarot cards drawn in the preview tool?',
+    answer:
+      'Tarot draws are based on the traditional 78-card archetypes (Major and Minor Arcana). The preview tool randomly draws archetypal symbols accompanied by upright and reversed contemplative interpretations.',
+    order: 3,
+  },
+  {
+    id: 'fallback-4',
+    question: 'Is my personal birth date and name data stored on any server?',
+    answer:
+      'No. In this Phase 2 foundation, all calculations and preview features are strictly client-side. Your inputs stay entirely within your browser session and are not transmitted to any external server or database.',
+    order: 4,
+  },
+  {
+    id: 'fallback-5',
+    question: 'How does the Light / Dark mode theme preference work?',
+    answer:
+      'The theme toggle in the header adapts to your preference using Tailwind CSS class-based switching. Your chosen mode is saved in localStorage and persists across page reloads. If no preference is selected, it defaults to your operating system’s theme.',
+    order: 5,
+  },
+  {
+    id: 'fallback-6',
+    question: 'What features are planned for future phases?',
+    answer:
+      'Phase 3 will introduce interactive calculation tools for Life Path and Tarot card spreads. Phase 4 will introduce detailed PDF/printable reports, and Phase 5 will add advanced compatibility algorithms.',
+    order: 6,
+  },
+];
+
+export default async function FAQPage() {
+  // Query FAQ items from database ordered by `order` field
+  let dbFaqs: Array<{ id: string; question: string; answer: string; order: number }> = [];
+
+  try {
+    dbFaqs = await prisma.faqItem.findMany({
+      orderBy: [{ order: 'asc' }, { createdAt: 'asc' }],
+      select: {
+        id: true,
+        question: true,
+        answer: true,
+        order: true,
+      },
+    });
+  } catch (error) {
+    console.error('Error fetching dynamic FAQ items from database:', error);
+  }
+
+  // Use database items if available, otherwise fallback
+  const faqItems = dbFaqs.length > 0 ? dbFaqs : FALLBACK_FAQS;
+  const defaultOpenValue = faqItems[0]?.id || 'faq-1';
 
   return (
     <div className="w-full max-w-5xl mx-auto px-3 sm:px-4 lg:px-6 py-8 sm:py-12 space-y-12 sm:space-y-16">
@@ -78,14 +109,20 @@ export default function FAQPage() {
           General & Methodology
         </h2>
 
-        <Accordion type="single" defaultValue="faq-1">
-          {faqItems.map((item) => (
-            <AccordionItem key={item.id} value={item.id}>
-              <AccordionTrigger>{item.question}</AccordionTrigger>
-              <AccordionContent>{item.answer}</AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        {faqItems.length === 0 ? (
+          <p className="text-sm text-muted-foreground italic">
+            No FAQ articles are currently available.
+          </p>
+        ) : (
+          <Accordion type="single" defaultValue={defaultOpenValue}>
+            {faqItems.map((item) => (
+              <AccordionItem key={item.id} value={item.id}>
+                <AccordionTrigger>{item.question}</AccordionTrigger>
+                <AccordionContent>{item.answer}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        )}
       </section>
 
       {/* Support / Next Steps Box */}
